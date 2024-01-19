@@ -129,9 +129,14 @@ public class Virus : KinematicBody2D
                 if (col.GetType().Equals(typeof(Cell)))
                 {
                     HandleCellCollission(col);
-                }else if (col.GetType().Equals(typeof(ImmuneSystemCell)))
+                }
+                else if (col.GetType().Equals(typeof(ImmuneSystemCell)))
                 {
                     HandleImmuneSystemCellCollision(col);
+                }
+                else if (col.GetType().Equals(typeof(Virus)))
+                {
+                    HandleVirusCollision(col);
                 }
             }  
         }
@@ -150,6 +155,11 @@ public class Virus : KinematicBody2D
     {
         ImmuneSystemCell partner = col as ImmuneSystemCell;
         RemoveSelf();
+    }
+
+    private void HandleVirusCollision(Godot.Object col)
+    {
+
     }
 
     private void RemoveSelf()
