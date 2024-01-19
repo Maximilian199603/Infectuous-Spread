@@ -18,6 +18,10 @@ public class Cell : KinematicBody2D
     private float _clickCooldown = 0f;
     private float _clickCoolDownMaxInSec = 0.25f;
 
+    public bool Incubating { get; set; }
+
+    public int Id = 0;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -46,6 +50,7 @@ public class Cell : KinematicBody2D
         }
         _clickCooldown = Mathf.Clamp(_clickCooldown - delta, -_clickCoolDownMaxInSec, _clickCoolDownMaxInSec);
         UpdateIndicator(global);
+        GD.Print(Incubating);
     }
 
     public override void _PhysicsProcess(float delta)

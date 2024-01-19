@@ -55,7 +55,7 @@ public class Virus : KinematicBody2D
             }  
         }
         UpdateIndicator(global);
-        _clickCooldown = Mathf.Clamp(_clickCooldown - delta, -_clickCoolDownMaxInSec,_clickCoolDownMaxInSec);
+        _clickCooldown = Mathf.Clamp(_clickCooldown - delta, -_clickCoolDownMaxInSec, _clickCoolDownMaxInSec);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -121,12 +121,40 @@ public class Virus : KinematicBody2D
         Vector2 tPos = (temp - Position).Normalized();
         if (Position.DistanceTo(temp) > 3)
         {
-            KinematicCollision2D result = MoveAndCollide(tPos * Speed);
+            KinematicCollision2D collisionresult = MoveAndCollide(tPos * Speed);
             //LookAt(tPos);
-            var col = result.Collider;
-            //TODO:
-            //On collision set the cell to incubating
-            //Delete the colliding virus in this case it is this 
+            if (collisionresult != null)
+            {
+                Godot.Object col = collisionresult.Collider;
+                if (col.GetType().Equals(typeof(Cell)))
+                {
+                    HandleCellCollission(col);
+                }else if (col.GetType().Equals(typeof(ImmuneSystemCell)))
+                {
+                    HandleImmuneSystemCellCollision(col);
+                }
+            }  
         }
+    }
+
+    private void HandleCellCollission(Godot.Object col)
+    {
+        Cell partner = col as Cell;
+        partner.Incubating = true;
+        RemoveSelf();
+        //TODO:
+        //Delete the colliding virus in this case it is this 
+    }
+
+    private void HandleImmuneSystemCellCollision(Godot.Object col)
+    {
+        ImmuneSystemCell partner = col as ImmuneSystemCell;
+        RemoveSelf();
+    }
+
+    private void RemoveSelf()
+    {
+        GlobalValues global = (GlobalValues)GetNode("/root/GlobalValues");
+        global.AliveViruses = Mathf.Clamp(global.AliveViruses - 1, 0, int.MaxValue);
     }
 }
