@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Virus.tscn" type="PackedScene" id=1]
+[ext_resource path="res://PlayerTest.cs" type="Script" id=2]
+[ext_resource path="res://Cell.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ClickDetector.cs" type="Script" id=4]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Virus2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 456, 127 )
+
+[node name="Virus3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 66, 143 )
+
+[node name="Cell" parent="." instance=ExtResource( 3 )]
+position = Vector2( 276, 240 )
+
+[node name="Targeter" type="Node" parent="."]
+script = ExtResource( 4 )
