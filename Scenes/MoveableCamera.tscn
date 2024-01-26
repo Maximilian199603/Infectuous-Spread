@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/CameraScript.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/CellSpawnController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/GameOver.tscn" type="PackedScene" id=5]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2( 41, 219 )
+scale = Vector2( 1, 1.00334 )
+script = ExtResource( 1 )
+Speed = 10.0
+
+[node name="UI" parent="." instance=ExtResource( 2 )]
+margin_top = -440.0
+margin_bottom = -380.0
+
+[node name="GameOver" parent="." instance=ExtResource( 5 )]
+
+[node name="CellSpawnController" parent="." instance=ExtResource( 3 )]

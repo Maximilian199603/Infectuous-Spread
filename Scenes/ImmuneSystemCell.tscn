@@ -1,0 +1,68 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Assets/Sprites/Immune/Immune 0003.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Immune/Immune 0000.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/ImmuneSystemCell.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Sprites/Immune/Immune 0002.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Immune/Immune 0001.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0006.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0007.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0001.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0003.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0002.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0005.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0000.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0004.png" type="Texture" id=13]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 23.0423
+height = 53.9153
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 201.01, 152.313 )
+
+[node name="ImmuneSystemCell" type="KinematicBody2D"]
+collision_layer = 3
+collision_mask = 2
+script = ExtResource( 3 )
+Speed = 1.0
+PositionTiming = 10.0
+
+[node name="Tail" type="AnimatedSprite" parent="."]
+position = Vector2( -77, -0.0725701 )
+rotation = 3.1446
+scale = Vector2( 1.23, 1.23 )
+frames = SubResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+rotation = 3.14571
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.57009
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+rotation = -3.13945
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0.0171662, -3.81624e-09 )
+shape = SubResource( 3 )
+
+[node name="PositionTimer" type="Timer" parent="."]

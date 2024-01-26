@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scripts/Virus.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Bacteriophage/Bac Fram0000.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Bacteriophage/Bac Fram0001.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/VirusArea.cs" type="Script" id=4]
+[ext_resource path="res://Assets/Sprites/Bacteriophage/Bac Fram0002.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Bacteriophage/Bac Fram0003.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/SelectionIndicator.cs" type="Script" id=7]
+[ext_resource path="res://Assets/LoadinBarFG.tres" type="StyleBox" id=8]
+[ext_resource path="res://Assets/LoadingBarBG.tres" type="StyleBox" id=9]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 25.9531
+height = 86.0897
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
+[node name="Virus" type="KinematicBody2D"]
+position = Vector2( -1.14441e-05, -2.38419e-07 )
+rotation = 6.2848
+collision_layer = 2
+script = ExtResource( 1 )
+Speed = 1.0
+RotationSpeed = 0.6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -1.90735e-06, -1.52588e-05 )
+scale = Vector2( 2.74515, 2.74515 )
+frames = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Indicator" type="Node2D" parent="."]
+script = ExtResource( 7 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="Top" type="Line2D" parent="Indicator"]
+points = PoolVector2Array( -58.8553, 74.1151, -59.162, -82.8846 )
+width = 5.0
+
+[node name="Bottom" type="Line2D" parent="Indicator"]
+position = Vector2( 117, -0.228576 )
+points = PoolVector2Array( -58.8553, 74.1151, -59.162, -82.8846 )
+width = 5.0
+
+[node name="Left" type="Line2D" parent="Indicator"]
+position = Vector2( -0.00195343, -1.00001 )
+points = PoolVector2Array( -59.8592, 72.1171, 60.1405, 71.8826 )
+width = 6.0
+
+[node name="Right" type="Line2D" parent="Indicator"]
+position = Vector2( -0.296954, -152 )
+points = PoolVector2Array( -59.8592, 72.1171, 60.1405, 71.8826 )
+width = 6.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchor_right = 0.147
+margin_left = -55.9547
+margin_top = 28.0904
+margin_right = 55.0453
+margin_bottom = 42.0904
+custom_styles/fg = ExtResource( 8 )
+custom_styles/bg = ExtResource( 9 )
+percent_visible = false
+
+[node name="Timer" type="Timer" parent="."]

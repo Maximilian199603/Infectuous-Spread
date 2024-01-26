@@ -1,0 +1,117 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Assets/Sprites/Cell/Cell 0001.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Cell/Cell 0000.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Cell.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0006.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0007.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0001.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0003.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0002.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0005.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0000.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/Tail/Tail 0004.png" type="Texture" id=11]
+[ext_resource path="res://Assets/LoadinBarFG.tres" type="StyleBox" id=12]
+[ext_resource path="res://Scripts/SelectionIndicator.cs" type="Script" id=13]
+[ext_resource path="res://Assets/LoadingBarBG.tres" type="StyleBox" id=14]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 40.0
+height = 94.0
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 40.0
+height = 96.0
+
+[node name="Cell" type="KinematicBody2D"]
+rotation = 0.0011096
+collision_mask = 3
+script = ExtResource( 3 )
+IncubationTime = 10.0
+PositionTiming = 5.0
+_SpawnCount = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.57228
+shape = SubResource( 1 )
+
+[node name="Tail" type="AnimatedSprite" parent="."]
+position = Vector2( -115.001, -0.872395 )
+rotation = 3.15192
+scale = Vector2( 1.34805, 1.34805 )
+frames = SubResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 1.14441e-05 )
+rotation = 0.00416755
+scale = Vector2( 1.82173, 1.82173 )
+frames = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+rotation = 1.57228
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="PositionTimer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 61.0108
+margin_top = -43.98
+margin_right = 101.011
+margin_bottom = -29.98
+rect_rotation = 90.0849
+rect_scale = Vector2( 2.28, 8.72 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = 6.96005
+margin_top = -36.0077
+margin_right = 80.9601
+margin_bottom = -22.0077
+rect_rotation = 90.0849
+custom_styles/fg = ExtResource( 12 )
+custom_styles/bg = ExtResource( 14 )
+max_value = 10.0
+percent_visible = false
+
+[node name="Indicator" type="Node2D" parent="."]
+rotation = 1.57228
+script = ExtResource( 13 )
+color = Color( 0.862745, 0.0745098, 0.929412, 1 )
+
+[node name="Top" type="Line2D" parent="Indicator"]
+points = PoolVector2Array( -61, -101, 63, -101 )
+width = 6.0
+
+[node name="Bottom" type="Line2D" parent="Indicator"]
+position = Vector2( 0, 212 )
+points = PoolVector2Array( -61, -101, 63, -101 )
+width = 6.0
+
+[node name="Left" type="Line2D" parent="Indicator"]
+position = Vector2( 1, 0 )
+points = PoolVector2Array( -59, -102, -59, 113 )
+width = 6.0
+
+[node name="Right" type="Line2D" parent="Indicator"]
+position = Vector2( 119, 0 )
+points = PoolVector2Array( -59, -102, -59, 113 )
+width = 6.0

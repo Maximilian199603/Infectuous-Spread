@@ -1,0 +1,26 @@
+[gd_scene format=2]
+
+[node name="SelectionIndicator" type="Node2D"]
+
+[node name="Temp" type="Line2D" parent="."]
+visible = false
+position = Vector2( 0, 23 )
+points = PoolVector2Array( -86, -80, 82, -80 )
+width = 5.0
+
+[node name="Temp2" type="Line2D" parent="."]
+visible = false
+position = Vector2( 0, 138 )
+points = PoolVector2Array( -86, -80, 82, -80 )
+width = 5.0
+
+[node name="Temp3" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( -83, -57, -83, 57 )
+width = 6.0
+
+[node name="Temp4" type="Line2D" parent="."]
+visible = false
+position = Vector2( 162, 0 )
+points = PoolVector2Array( -83, -57, -83, 57 )
+width = 6.0
